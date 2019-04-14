@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NuGetHelper", "NuGetHelper\NuGetHelper.csproj", "{43420F9E-4FD4-4793-A24B-AB72D8CB5604}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NuGetHelper.Tool", "NuGetHelper.Tool\NuGetHelper.Tool.csproj", "{6DE77752-7108-4C9F-9684-5C72847E3994}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{43420F9E-4FD4-4793-A24B-AB72D8CB5604}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43420F9E-4FD4-4793-A24B-AB72D8CB5604}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43420F9E-4FD4-4793-A24B-AB72D8CB5604}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43420F9E-4FD4-4793-A24B-AB72D8CB5604}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DE77752-7108-4C9F-9684-5C72847E3994}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DE77752-7108-4C9F-9684-5C72847E3994}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DE77752-7108-4C9F-9684-5C72847E3994}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DE77752-7108-4C9F-9684-5C72847E3994}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

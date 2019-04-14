@@ -70,10 +70,9 @@ namespace NuGetHelper
                 
                 if (includeAttribute != null && versionAttribute != null)
                 {
-                    ProjectInfo.Packages.Add(NuGetPackageDetails.Create(
+                    ProjectInfo.Packages.Add(NuGetPackageDetails.CreateFromCSProject(
                         includeAttribute.Value,
                         versionAttribute.Value,
-                        NuGetPackageLocation.CSProjectFile,
                         NuGetPackageType.NuGet));
                 }
             }
@@ -88,10 +87,9 @@ namespace NuGetHelper
 
                     if (includeAttribute != null && versionAttribute != null)
                     {
-                        ProjectInfo.Packages.Add(NuGetPackageDetails.Create(
+                        ProjectInfo.Packages.Add(NuGetPackageDetails.CreateFromCSProject(
                             includeAttribute.Value,
                             versionAttribute.Value,
-                            NuGetPackageLocation.CSProjectFile,
                             NuGetPackageType.CLITool));
                     }
                 }
@@ -129,11 +127,9 @@ namespace NuGetHelper
                 
                 if (idAttribute != null && versionAttribute != null)
                 {
-                    ProjectInfo.Packages.Add(NuGetPackageDetails.Create(
+                    ProjectInfo.Packages.Add(NuGetPackageDetails.CreateFromPackagesConfig(
                         idAttribute.Value,
-                        versionAttribute.Value,
-                        NuGetPackageLocation.PackagesConfigFile,
-                        NuGetPackageType.NuGet));
+                        versionAttribute.Value));
                 }
             }
         }

@@ -1,8 +1,9 @@
 ﻿using System;
-using System.CommandLine;
 using System.CommandLine.Invocation;
 using System.Reflection;
+using NuGetHelper.Tool.Helpers;
 using NuGetHelper.Tool.Models;
+using static NuGetHelper.Tool.Helpers.ColoredConsole;
 
 namespace NuGetHelper.Tool
 {
@@ -12,7 +13,7 @@ namespace NuGetHelper.Tool
         
         public static int Main(string[] args)
         {
-            var rootCommand = BuildCommands();
+            var rootCommand = CommandLineHelper.BuildCommandLineCommands();
             rootCommand.Handler = CommandHandler.Create<Options>(options => Execute(options));
             
             return rootCommand.InvokeAsync(args).Result;
@@ -20,95 +21,43 @@ namespace NuGetHelper.Tool
 
         private static void Execute(Options options)
         {
-            Console.WriteLine($"Welcome to NuGetHelper [tool: {VersionsInfo.tool}, library: {VersionsInfo.library}]");
-            Console.WriteLine();
+            Print($"Welcome to NuGetHelper [tool: v.{VersionsInfo.tool}, " +
+                  $"library: v.{VersionsInfo.library}]");
+            PrintEmptyLine();
 
-            Console.WriteLine("Processing, please wait...");
-            
-            new Parser().RunAsync(options.SolutionFolder, new ParserOptions
+            Print("Processing, please wait...");
+
+            try
             {
-                GenerateLicenseDependencies = options.GenerateLicense,
-                LoadNuGetMetadata = options.LoadMetadata,
-                AlwaysIncludeResultsFromPackagesConfigFile = !options.IgnorePackagesConfig,
-                IncludeCLITools = !options.IgnoreCLITools,
-                PrintResults = options.PrintResults
-            }).Wait();
-            
-            Console.WriteLine("Done ❤️");
-            Console.WriteLine();
-            Console.WriteLine("Don't forget to visit https://github.com/RustamIrzaev/NuGetHelper");
-        }
-        
-        private static RootCommand BuildCommands()
-        {
-            var optionSolutionFolder = new Option(
-                new []{"--solution-folder", "--folder"},
-                "Specifies a folder where a project is located",
-                new Argument<string>()
-                );
-            
-            var optionGenerateLicense = new Option(
-                new []{"--generate-license", "--license"},
-                "Generates LICENSE-DEPENDENCIES.md file",
-                new Argument<bool>(false)
-            );
-            
-            var optionLoadMetadata = new Option(
-                new []{"--load-metadata"},
-                "Load NuGet information for each package",
-                new Argument<bool>(true)
-            );
-            
-            var optionIgnoreCLITools = new Option(
-                new []{"--ignore-cli-tools"},
-                "Ignores CLITools packages",
-                new Argument<bool>(false)
-            );
-            
-            var optionIgnorePackagesConfig = new Option(
-                new []{"--ignore-packages-config"},
-                "Ignores processing packages.config file",
-                new Argument<bool>(false)
-            );
-            
-            var optionPrintResults = new Option(
-                new []{"--print-results"},
-                "Writes all information to console",
-                new Argument<bool>(true)
-            );
-            
-            var rootCommand = new RootCommand();
-            rootCommand.AddOption(optionSolutionFolder);
-            rootCommand.AddOption(optionGenerateLicense);
-            rootCommand.AddOption(optionLoadMetadata);
-            rootCommand.AddOption(optionIgnoreCLITools);
-            rootCommand.AddOption(optionIgnorePackagesConfig);
-            rootCommand.AddOption(optionPrintResults);
-            
-            rootCommand.Argument.AddValidator(result =>
+                new Parser(OptionsConverter.Convert(options)).RunAsync(options.SolutionFolder).Wait();
+            }
+            catch (Exception ex)
             {
-                if (result.Children["--solution-folder"] is null)
-                {
-                    return "Option SolutionFolder is required";
-                }
-
-                return null;
-            });
-
-            return rootCommand;
+                PrintError(ex);
+                Terminate();
+            }
+            
+            PrintEmptyLine();
+            PrintSuccess("Done ❤️");
+            PrintEmptyLine();
+            PrintGray("Don't forget to visit https://github.com/RustamIrzaev/NuGetHelper");
         }
         
         private static (string, string) GetVersions()
         {
-            var toolVersion = Assembly.GetExecutingAssembly()
+            var getVersion = new Func<Assembly, string>(assembly => assembly
                 .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
-                .InformationalVersion;
-            
-            var libraryVersion = typeof(Parser).Assembly
-                .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
-                .InformationalVersion;
+                .InformationalVersion);
+
+            var toolVersion = getVersion(Assembly.GetExecutingAssembly());
+            var libraryVersion = getVersion(typeof(Parser).Assembly);
             
             return (toolVersion, libraryVersion);
+        }
+
+        private static void Terminate()
+        {
+            Environment.Exit(-1);
         }
     }
 }

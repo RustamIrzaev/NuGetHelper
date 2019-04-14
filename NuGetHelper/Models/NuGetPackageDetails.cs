@@ -19,5 +19,20 @@ namespace NuGetHelper.Models
                 PackageType = type
             };
         }
+
+        public static NuGetPackageDetails CreateFromPackagesConfig(string package, string version)
+        {
+            return Create(package, version, 
+                NuGetPackageLocation.PackagesConfigFile, 
+                NuGetPackageType.NuGet);
+        }
+        
+        public static NuGetPackageDetails CreateFromCSProject(string package, string version, 
+            NuGetPackageType type)
+        {
+            return Create(package, version, 
+                NuGetPackageLocation.CSProjectFile, 
+                type);
+        }
     }
 }

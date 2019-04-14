@@ -4,7 +4,7 @@
         <OutputType>Exe</OutputType>
         <TargetFramework>netcoreapp2.2</TargetFramework>
         <IsPackable>false</IsPackable>
-        <Version>1.0.0-beta.1</Version>
+        <Version>1.0.0-beta.2</Version>
         <Authors>Rustam Irzaiev</Authors>
     </PropertyGroup>
 

@@ -8,42 +8,43 @@ namespace NuGetHelper
 {
     public class Parser
     {
+        private readonly ParserOptions _parserOptions;
+        private readonly ProjectFileParser _projectFileParser;
+        
         private string _projectPath;
 
-        public async Task RunAsync(string projectPath, ParserOptions options = null)
+        public Parser(ParserOptions options)
+        {
+            _parserOptions = options ?? ParserOptions.Default();
+            _projectFileParser = new ProjectFileParser(options);
+        }
+        
+        public async Task RunAsync(string projectPath)
         {
             ValidationHelper.ThrowIfStringIsNullOrEmpty(projectPath);
-            
-            if (options == null)
-                options = ParserOptions.Default();
-            
-            var projectFileParser = new ProjectFileParser(options);
             
             _projectPath = projectPath;
             
             var solutionDetails = GetSolutionDetails();
 
             if (solutionDetails == null)
-            {
-                await Task.FromResult(new Exception("Can't find project files in the specified directory."));
-                return;
-            }
+                throw new Exception("Can't find project files in the specified directory.");
 
             foreach (var csProjectFile in solutionDetails.CSProjectFiles)
             {
-                projectFileParser.SetCSProjectFile(csProjectFile);
-                projectFileParser.Parse();
+                _projectFileParser.SetCSProjectFile(csProjectFile);
+                _projectFileParser.Parse();
                 
-                if (options.LoadNuGetMetadata)
-                    await projectFileParser.ObtainNugetMetadataAsync();
+                if (_parserOptions.LoadNuGetMetadata)
+                    await _projectFileParser.ObtainNugetMetadataAsync();
                 
-                solutionDetails.AddProjectDetails(projectFileParser.ProjectInfo);
+                solutionDetails.AddProjectDetails(_projectFileParser.ProjectInfo);
             }
             
-            if (options.PrintResults)
+            if (_parserOptions.PrintResults)
                 solutionDetails.Print();
             
-            if (options.GenerateLicenseDependencies)
+            if (_parserOptions.GenerateLicenseDependencies)
                 ReportBroker.GenerateLicenseDependencies(solutionDetails, "LICENSE-DEPENDENCIES.MD");
         }
 

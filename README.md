@@ -15,6 +15,10 @@ Here what you may achive using this tool:
 
 Get the latest binaries [from here](https://github.com/RustamIrzaev/NuGetHelper/releases).
 
+There are two kind of archives per each platform: with and without **__full_** suffix.
+
+Packages with **__full** suffix are [self-contained applications](https://docs.microsoft.com/en-us/dotnet/core/deploying/#self-contained-deployments-scd), that **do not** need dotnet framework to be installed, while packages without that suffix are [framework-dependent](https://docs.microsoft.com/en-us/dotnet/core/deploying/#framework-dependent-deployments-fdd) applications and they do need standalone donet framework installed.
+
 ## How to use (easy way)
 
 All parameters will be set to their default values as specified in Parameters section.

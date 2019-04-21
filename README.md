@@ -4,7 +4,7 @@ NuGet Helper is a powerful tool that may generate a file with NuGet licenses fro
 
 Here what you may achive using this tool:
 
-* Generate LICENSE-DEPENDENCIES.md file that contains information about all your NuGet packages in a whole solution (including version, link to a license file and more)
+* Generate [LICENSE-DEPENDENCIES.md](assets/LICENSE-DEPENDENCIES.md) ([example](assets/LICENSE-DEPENDENCIES.md)) file that contains information about all NuGet packages used in a whole solution (including version, link to a license file and more)
 * Supports both: .Net Core and .Net Framework projects
 * Show information about each *.csproj file (detect framework version, check if the project is .Net Core or .Net Framework project)
 * Check and parse packages.config file

@@ -4,7 +4,7 @@ NuGet Helper is a powerful tool that may generate a file with NuGet licenses fro
 
 Here what you may achive using this tool:
 
-* Generate [LICENSE-DEPENDENCIES.md](assets/LICENSE-DEPENDENCIES.md) ([example](assets/LICENSE-DEPENDENCIES.md)) file that contains information about all NuGet packages used in a whole solution (including version, link to a license file and more)
+* Generate [LICENSE-DEPENDENCIES.md](assets/LICENSE-DEPENDENCIES.MD) ([example](assets/LICENSE-DEPENDENCIES.MD)) file that contains information about all NuGet packages used in a whole solution (including version, link to a license file and more)
 * Supports both: .Net Core and .Net Framework projects
 * Show information about each *.csproj file (detect framework version, check if the project is .Net Core or .Net Framework project)
 * Check and parse packages.config file
@@ -17,7 +17,7 @@ Get the latest binaries [from here](https://github.com/RustamIrzaev/NuGetHelper/
 
 There are two kind of archives per each platform: with and without **__full_** suffix.
 
-Packages with **__full** suffix are [self-contained applications](https://docs.microsoft.com/en-us/dotnet/core/deploying/#self-contained-deployments-scd), that **do not** need dotnet framework to be installed, while packages without that suffix are [framework-dependent](https://docs.microsoft.com/en-us/dotnet/core/deploying/#framework-dependent-deployments-fdd) applications and they do need standalone donet framework installed.
+Packages with **__full** suffix are [self-contained applications](https://docs.microsoft.com/en-us/dotnet/core/deploying/#self-contained-deployments-scd), that **do not** need dotnet framework to be installed, while packages without that suffix are [framework-dependent](https://docs.microsoft.com/en-us/dotnet/core/deploying/#framework-dependent-deployments-fdd) applications and they do need standalone dotnet framework installed.
 
 ## How to use (easy way)
 

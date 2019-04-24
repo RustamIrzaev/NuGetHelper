@@ -3,7 +3,7 @@
     <PropertyGroup>
         <TargetFramework>netcoreapp2.2</TargetFramework>
         <IsPackable>false</IsPackable>
-        <Version>1.0.0-beta.7</Version>
+        <Version>1.0.0-beta.8</Version>
         <Authors>Rustam Irzaiev</Authors>
     </PropertyGroup>
 

@@ -9,14 +9,12 @@ namespace NuGetHelper
     public class Parser
     {
         private readonly ParserOptions _parserOptions;
-        private readonly ProjectFileParser _projectFileParser;
         
         private string _projectPath;
 
         public Parser(ParserOptions options)
         {
             _parserOptions = options ?? ParserOptions.Default();
-            _projectFileParser = new ProjectFileParser(options);
         }
         
         public async Task RunAsync(string projectPath)
@@ -32,13 +30,15 @@ namespace NuGetHelper
 
             foreach (var csProjectFile in solutionDetails.CSProjectFiles)
             {
-                _projectFileParser.SetCSProjectFile(csProjectFile);
-                _projectFileParser.Parse();
+                var projectFileParser = new ProjectFileParser(_parserOptions);
+                
+                projectFileParser.SetCSProjectFile(csProjectFile);
+                projectFileParser.Parse();
                 
                 if (_parserOptions.LoadNuGetMetadata)
-                    await _projectFileParser.ObtainNugetMetadataAsync();
+                    await projectFileParser.ObtainNugetMetadataAsync();
                 
-                solutionDetails.AddProjectDetails(_projectFileParser.ProjectInfo);
+                solutionDetails.AddProjectDetails(projectFileParser.ProjectInfo);
             }
             
             if (_parserOptions.PrintResults)

@@ -15,7 +15,7 @@ namespace NuGetHelper.Tool.Helpers
             var optionGenerateLicense = new Option(
                 new []{"--generate-license", "--license"},
                 "Generates LICENSE-DEPENDENCIES.md file",
-                new Argument<bool>(false)
+                new Argument<bool>(true)
             );
             
             var optionLoadMetadata = new Option(
@@ -39,7 +39,7 @@ namespace NuGetHelper.Tool.Helpers
             var optionPrintResults = new Option(
                 new []{"--print-results"},
                 "Writes all information to console",
-                new Argument<bool>(true)
+                new Argument<bool>(false)
             );
             
             var rootCommand = new RootCommand();

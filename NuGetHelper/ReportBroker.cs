@@ -38,7 +38,7 @@ namespace NuGetHelper
                         }
                         
                         
-                        writer.WriteLine($"|{package.Name}|{package.PackageType}|{package.Version}|{licenseUrlData}|");
+                        writer.WriteLine($"|{package.Name}|{package.PackageType}|{package.Version ?? "n/a"}|{licenseUrlData}|");
                     }
                     
                     writer.WriteLine();

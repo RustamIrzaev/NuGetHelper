@@ -43,9 +43,15 @@ namespace NuGetHelper
             
             if (_parserOptions.PrintResults)
                 solutionDetails.Print();
+
+            Console.WriteLine("Processing completed");
             
             if (_parserOptions.GenerateLicenseDependencies)
+            {
                 ReportBroker.GenerateLicenseDependencies(solutionDetails, "LICENSE-DEPENDENCIES.MD");
+                Console.WriteLine();
+                Console.WriteLine("LICENSE-DEPENDENCIES.MD has been generated.");
+            }
         }
 
         private SolutionDetails GetSolutionDetails()
@@ -64,8 +70,8 @@ namespace NuGetHelper
                 "*.csproj",
                 SearchOption.AllDirectories);
 
-            if (csProjectFiles.Length == 0)
-                return null;
+//            if (csProjectFiles.Length == 0)
+//                return null;
             
             return new SolutionDetails(_projectPath, solutionFiles, csProjectFiles);
         }

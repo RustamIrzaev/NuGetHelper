@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Xml;
 using NuGetHelper.Helpers;
@@ -39,8 +41,11 @@ namespace NuGetHelper
         {
             foreach (var package in ProjectInfo.Packages)
             {
-                var metadata = await NuGetTools.GetNugetPackageMetadataAsync(package.Name, package.Version);
-                package.Metadata = metadata;
+                if (!string.IsNullOrEmpty(package.Version))
+                {
+                    var metadata = await NuGetTools.GetNugetPackageMetadataAsync(package.Name, package.Version);
+                    package.Metadata = metadata;
+                }
             }
         }
         
@@ -48,6 +53,14 @@ namespace NuGetHelper
         {
             var doc = new XmlDocument();
             doc.Load(ProjectInfo.Config.CSProjectFilePath);
+            
+            foreach (XmlNode node in doc)
+            {
+                if (node.NodeType == XmlNodeType.XmlDeclaration)
+                {
+                    doc.RemoveChild(node);
+                }
+            }
             
             var xRoot = doc.DocumentElement;
 
@@ -62,17 +75,32 @@ namespace NuGetHelper
 
             ProjectInfo.TargetFramework = targetFramework;
             
-            var packageReferencesNodes = xRoot.SelectNodes("ItemGroup/PackageReference");
-            foreach (XmlNode packageNode in packageReferencesNodes)
+            var packageReferences = new List<XmlNode>();
+            packageReferences.AddRange(xRoot.SelectNodes("ItemGroup/PackageReference").Cast<XmlNode>());
+            // probably, old MVC projects
+            packageReferences.AddRange(xRoot.SelectNodes("*[local-name() = 'ItemGroup']/*[local-name() = 'Reference']").Cast<XmlNode>());
+            // probably, Xamarin.* projects
+            packageReferences.AddRange(xRoot.SelectNodes("*[local-name() = 'ItemGroup']/*[local-name() = 'PackageReference']").Cast<XmlNode>());
+            
+            foreach (XmlNode packageNode in packageReferences.Distinct())
             {
                 var includeAttribute = packageNode.Attributes["Include"];
-                var versionAttribute = packageNode.Attributes["Version"];
+                string versionValue;
                 
-                if (includeAttribute != null && versionAttribute != null)
+                if (packageNode.HasChildNodes)
+                {
+                    versionValue = packageNode.SelectSingleNode("*[local-name() = 'Version']")?.InnerText;
+                }
+                else
+                {
+                    versionValue = packageNode.Attributes["Version"]?.Value;
+                }
+
+                if (includeAttribute != null && !string.IsNullOrEmpty(versionValue))
                 {
                     ProjectInfo.Packages.Add(NuGetPackageDetails.CreateFromCSProject(
                         includeAttribute.Value,
-                        versionAttribute.Value,
+                        versionValue,
                         NuGetPackageType.NuGet));
                 }
             }

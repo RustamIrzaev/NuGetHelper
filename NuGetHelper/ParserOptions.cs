@@ -14,7 +14,7 @@ namespace NuGetHelper
             {
                 LoadNuGetMetadata = true,
                 IncludeCLITools = true,
-                AlwaysIncludeResultsFromPackagesConfigFile = true,
+                AlwaysIncludeResultsFromPackagesConfigFile = false,
                 GenerateLicenseDependencies = true,
                 PrintResults = true
             };

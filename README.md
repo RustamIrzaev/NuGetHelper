@@ -63,11 +63,11 @@ dotnet NuGetHelper.Tool.dll --solution-folder "<PROJECT_FOLDER>" --generate-lice
 |Parameter|Required?|Description|Default value|
 |---|---|---|---|
 |**--solution-folder** _or_ **--folder**|**yes**|A path to a folder where the projects is located|**-**|
-|**-generate-license** _or_ **--license**|_no_|Generates LICENSE-DEPENDENCIES.md file|**true**|
+|**-generate-license** _or_ **--license**|_no_|Generates [LICENSE-DEPENDENCIES.md](assets/LICENSE-DEPENDENCIES.MD) file|**true**|
 |**--load-metadata**|_no_|Loads package information from [NuGet](http://nuget.org) _(Tags, Summary, Description and more)_|**true**|
 |**--ignore-cli-tools**|_no_|Ignores CLITools<br>_(Works only on .Net Core projects)_|false|
 |**--ignore-packages-config**|_no_|Ignores packages.config file processing|false|
-|**--print-results**|_no_|Writes all information to console|**true**|
+|**--print-results**|_no_|Writes all information to console|false|
 
 ## Bulding the tool
 

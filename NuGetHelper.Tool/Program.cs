@@ -21,7 +21,7 @@ namespace NuGetHelper.Tool
 
         private static void Execute(Options options)
         {
-            Print($"Welcome to NuGetHelper [tool: v.{VersionsInfo.tool}, " +
+            PrintGray($"Welcome to NuGetHelper [tool: v.{VersionsInfo.tool}, " +
                   $"library: v.{VersionsInfo.library}]");
             PrintEmptyLine();
 

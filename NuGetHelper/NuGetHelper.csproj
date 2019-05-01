@@ -2,9 +2,17 @@
 
     <PropertyGroup>
         <TargetFramework>netcoreapp2.2</TargetFramework>
-        <IsPackable>false</IsPackable>
+        <IsPackable>true</IsPackable>
         <Version>1.0.0-beta.9</Version>
-        <Authors>Rustam Irzaiev</Authors>
+        <Authors>Rustam Irzaev</Authors>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Title>NuGetHelper</Title>
+        <Description>NuGet Helper is a powerful tool that generates a file with NuGet licenses from your projects and much more!</Description>
+        <Copyright>Rustam Irzaev</Copyright>
+        <PackageProjectUrl>https://github.com/RustamIrzaev/NuGetHelper</PackageProjectUrl>
+        <PackageLicenseUrl>https://github.com/RustamIrzaev/NuGetHelper/blob/dev/LICENSE.md</PackageLicenseUrl>
+        <RepositoryUrl>https://github.com/RustamIrzaev/NuGetHelper</RepositoryUrl>
+        <PackageTags>nuget</PackageTags>
     </PropertyGroup>
 
     <ItemGroup>

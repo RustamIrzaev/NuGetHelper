@@ -34,10 +34,10 @@ for r in ${RUNTIMES[@]}; do
     fi
 
     echo "Creating an archive..."
-    zip -vrq "$SCRIPT_DIR/build/nuget-helper$VERSION_STRING.$r.zip" "$DIR/"
+    zip -vrqj "$SCRIPT_DIR/build/nuget-helper$VERSION_STRING.$r.zip" "$DIR/"
 
     if [ "$BUILD_SC" == true ]; then
-        zip -vrq "$SCRIPT_DIR/build/nuget-helper$VERSION_STRING.${r}_full.zip" "$DIR_SC/"
+        zip -vrqj "$SCRIPT_DIR/build/nuget-helper$VERSION_STRING.${r}_full.zip" "$DIR_SC/"
     fi
 
     rm -R $DIR

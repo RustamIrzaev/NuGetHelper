@@ -2,14 +2,15 @@
 
     <PropertyGroup>
         <OutputType>Exe</OutputType>
-        <TargetFramework>netcoreapp2.2</TargetFramework>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
         <IsPackable>false</IsPackable>
-        <Version>1.0.0-beta.4</Version>
+        <Version>1.0.1</Version>
         <Authors>Rustam Irzaiev</Authors>
+        <PackageVersion>1.0.1</PackageVersion>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="System.CommandLine.Experimental" Version="0.2.0-alpha.19174.3" />
+      <PackageReference Include="System.CommandLine" Version="2.0.0-beta1.20574.7" />
     </ItemGroup>
 
     <ItemGroup>

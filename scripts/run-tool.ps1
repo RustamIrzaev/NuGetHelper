@@ -11,6 +11,7 @@ $LoadMetadata = $true
 $IgnoreCLITools = $false
 $IgnorePackagesConfig = $false
 $PrintResult = $true
+$ShortOutput = $true
 
 if ([string]::IsNullOrEmpty($SolutionFolder))
 {
@@ -49,6 +50,11 @@ if ($IgnorePackagesConfig)
 if ($PrintResult)
 {
 	$arguments += "--print-results"
+}
+
+if ($ShortOutput)
+{
+	$arguments += "--short"
 }
 
 #dotnet run --project NuGetHelper.Tool --configuration Debug --no-build --no-restore -- "$arguments"

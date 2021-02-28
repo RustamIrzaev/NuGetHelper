@@ -35,7 +35,7 @@ namespace NuGetHelper.Models
             _projects.Add(projectDetails);
         }
         
-        public void Print()
+        public void Print(bool isShortResult)
         {
             Console.WriteLine();
             Console.WriteLine($"Origin solution path: {SolutionPath}");
@@ -58,20 +58,28 @@ namespace NuGetHelper.Models
                 {
                     Console.WriteLine($"    NuGet name: {package.Name}");
                     Console.WriteLine($"    NuGet version: {package.Version}");
-                    Console.WriteLine($"    NuGet location: {package.Source}");
-                    Console.WriteLine($"    NuGet package type: {package.PackageType}");
-                    Console.WriteLine($"    Has metadata: {package.Metadata != null}");
+
+                    if (!isShortResult)
+                    {
+                        Console.WriteLine($"    NuGet location: {package.Source}");
+                        Console.WriteLine($"    NuGet package type: {package.PackageType}");
+                        Console.WriteLine($"    Has metadata: {package.Metadata != null}");
+                    }
 
                     if (package.Metadata != null)
                     {
                         Console.WriteLine($"      License url: {package.Metadata.LicenseUrl}");
-                        Console.WriteLine($"      Project url: {package.Metadata.ProjectUrl}");
-                        Console.WriteLine($"      Tags: {package.Metadata.Tags}");
-                        Console.WriteLine($"      Title: {package.Metadata.Title}");
-                        Console.WriteLine($"      Owners: {package.Metadata.Owners}");
-                        Console.WriteLine($"      Authors: {package.Metadata.Authors}");
-                        Console.WriteLine($"      Summary: {package.Metadata.Summary}");
-                        Console.WriteLine($"      Description: {package.Metadata.Description}");
+
+                        if (!isShortResult)
+                        {
+                            Console.WriteLine($"      Project url: {package.Metadata.ProjectUrl}");
+                            Console.WriteLine($"      Tags: {package.Metadata.Tags}");
+                            Console.WriteLine($"      Title: {package.Metadata.Title}");
+                            Console.WriteLine($"      Owners: {package.Metadata.Owners}");
+                            Console.WriteLine($"      Authors: {package.Metadata.Authors}");
+                            Console.WriteLine($"      Summary: {package.Metadata.Summary}");
+                            Console.WriteLine($"      Description: {package.Metadata.Description}");
+                        }
                     }
                     
                     Console.WriteLine();

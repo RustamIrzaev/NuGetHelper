@@ -12,7 +12,8 @@ namespace NuGetHelper.Tool.Helpers
                 LoadNuGetMetadata = options.LoadMetadata,
                 AlwaysIncludeResultsFromPackagesConfigFile = !options.IgnorePackagesConfig,
                 IncludeCLITools = !options.IgnoreCLITools,
-                PrintResults = options.PrintResults
+                PrintResults = options.PrintResults,
+                ShortOutput = options.ShortOutput
             };
         }
     }

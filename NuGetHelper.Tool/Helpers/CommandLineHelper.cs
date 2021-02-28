@@ -6,51 +6,58 @@ namespace NuGetHelper.Tool.Helpers
     {
         public static RootCommand BuildCommandLineCommands()
         {
-            var optionSolutionFolder = new Option(
+            var optionSolutionFolder = new Option<string>(
                 new []{"--solution-folder", "--folder"},
-                "Specifies a folder where a project is located",
-                new Argument<string>()
-                );
-            
-            var optionGenerateLicense = new Option(
-                new []{"--generate-license", "--license"},
-                "Generates LICENSE-DEPENDENCIES.md file",
-                new Argument<bool>(true)
+                "Specifies a folder where a project is located"
             );
-            
-            var optionLoadMetadata = new Option(
+
+            var optionGenerateLicense = new Option<bool>(
+                new[] {"--generate-license", "--license"},
+                getDefaultValue: () => true,
+                "Generates LICENSE-DEPENDENCIES.md file"
+            );
+
+            var optionLoadMetadata = new Option<bool>(
                 new []{"--load-metadata"},
-                "Load NuGet information for each package",
-                new Argument<bool>(true)
+                getDefaultValue: () => true,
+                "Load NuGet information for each package"
             );
-            
-            var optionIgnoreCLITools = new Option(
+
+            var optionIgnoreCLITools = new Option<bool>(
                 new []{"--ignore-cli-tools"},
-                "Ignores CLITools packages",
-                new Argument<bool>(false)
+                getDefaultValue: () => false,
+                "Ignores CLITools packages"
             );
-            
-            var optionIgnorePackagesConfig = new Option(
+
+            var optionIgnorePackagesConfig = new Option<bool>(
                 new []{"--ignore-packages-config"},
-                "Ignores processing packages.config file",
-                new Argument<bool>(false)
+                getDefaultValue: () => false,
+                "Ignores processing packages.config file"
             );
-            
-            var optionPrintResults = new Option(
+
+            var optionPrintResults = new Option<bool>(
                 new []{"--print-results"},
-                "Writes all information to console",
-                new Argument<bool>(false)
+                getDefaultValue: () => false,
+                "Writes all information to console"
             );
-            
+
+            var optionShortOutput = new Option<bool>(
+                new []{"--short-output", "--short"},
+                getDefaultValue: () => false,
+                "Shorten the information printed to the console"
+            );
+
             var rootCommand = new RootCommand();
+            
             rootCommand.AddOption(optionSolutionFolder);
             rootCommand.AddOption(optionGenerateLicense);
             rootCommand.AddOption(optionLoadMetadata);
             rootCommand.AddOption(optionIgnoreCLITools);
             rootCommand.AddOption(optionIgnorePackagesConfig);
             rootCommand.AddOption(optionPrintResults);
+            rootCommand.AddOption(optionShortOutput);
             
-            rootCommand.Argument.AddValidator(result =>
+            rootCommand.AddValidator(result =>
             {
                 if (result.Children["--solution-folder"] is null)
                 {
@@ -59,6 +66,7 @@ namespace NuGetHelper.Tool.Helpers
 
                 return null;
             });
+            rootCommand.TreatUnmatchedTokensAsErrors = true;
 
             return rootCommand;
         }

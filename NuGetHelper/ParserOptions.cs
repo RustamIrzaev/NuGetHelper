@@ -7,6 +7,7 @@ namespace NuGetHelper
         public bool AlwaysIncludeResultsFromPackagesConfigFile { get; set; }
         public bool GenerateLicenseDependencies { get; set; }
         public bool PrintResults { get; set; }
+        public bool ShortOutput { get; set; }
 
         public static ParserOptions Default()
         {
@@ -16,7 +17,8 @@ namespace NuGetHelper
                 IncludeCLITools = true,
                 AlwaysIncludeResultsFromPackagesConfigFile = false,
                 GenerateLicenseDependencies = true,
-                PrintResults = true
+                PrintResults = true,
+                ShortOutput = true
             };
         }
     }

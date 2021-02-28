@@ -42,8 +42,8 @@ namespace NuGetHelper
             }
             
             if (_parserOptions.PrintResults)
-                solutionDetails.Print();
-
+                solutionDetails.Print(_parserOptions.ShortOutput);
+            
             Console.WriteLine("Processing completed");
             
             if (_parserOptions.GenerateLicenseDependencies)

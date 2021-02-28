@@ -74,8 +74,9 @@ dotnet NuGetHelper.Tool.dll --solution-folder "<PROJECT_FOLDER>" --generate-lice
 |**--ignore-cli-tools**|_no_|Ignores CLITools<br>_(Works only on .Net Core projects)_|false|
 |**--ignore-packages-config**|_no_|Ignores packages.config file processing|false|
 |**--print-results**|_no_|Writes all information to console|false|
+|**--short**|_no_|Ignores the metadata if set to true|false|
 
-## Bulding the tool
+## Building the tool (advanced users)
 
 If you want to create a build on your own, just follow those simple steps:
 

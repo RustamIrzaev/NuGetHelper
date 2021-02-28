@@ -8,5 +8,6 @@ namespace NuGetHelper.Tool.Models
         public bool IgnoreCLITools { get; set; }
         public bool IgnorePackagesConfig { get; set; }
         public bool PrintResults { get; set; }
+        public bool ShortOutput { get; set; }
     }
 }

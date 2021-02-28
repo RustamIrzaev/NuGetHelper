@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CommandLine;
 using System.CommandLine.Invocation;
 using System.Reflection;
 using NuGetHelper.Tool.Helpers;
@@ -15,7 +16,7 @@ namespace NuGetHelper.Tool
         {
             var rootCommand = CommandLineHelper.BuildCommandLineCommands();
             rootCommand.Handler = CommandHandler.Create<Options>(options => Execute(options));
-            
+
             return rootCommand.InvokeAsync(args).Result;
         }
 

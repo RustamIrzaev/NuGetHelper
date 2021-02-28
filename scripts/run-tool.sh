@@ -8,6 +8,7 @@ LOAD_METADATA=true
 IGNORE_CLI_TOOLS=false
 IGNORE_PACKAGES_CONFIG=false
 PRINT_RESULTS=true
+SHORT_OUTPUT=true
 
 if [ "$SOLUTION_FOLDER" == "" ]; then
     SOLUTION_FOLDER="$SCRIPT_DIR"
@@ -38,6 +39,10 @@ fi
 
 if [ "$PRINT_RESULTS" == true ]; then
     ARGUMENTS+=("--print-results")
+fi
+
+if [ "$SHORT_OUTPUT" == true ]; then
+    ARGUMENTS+=("--short")
 fi
 
 dotnet NuGetHelper.Tool.dll --solution-folder $SOLUTION_FOLDER "${ARGUMENTS[@]}"

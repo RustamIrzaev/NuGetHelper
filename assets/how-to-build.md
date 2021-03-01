@@ -23,4 +23,4 @@ If you want to create a build on your own, just follow these steps:
 
 * When the script completes, you will find a ready-to-use build in a `build` folder.
 
-[< Back](../README.MD)
+[< Back](../README.md)

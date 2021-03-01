@@ -1,29 +1,33 @@
 # NuGet Helper
 
-NuGet Helper is a powerful tool that generates a file with NuGet licenses from your projects and much more!
+`NuGet Helper` is a powerful tool that helps you working with licenses inside projects and much more.
 
-Here what you can achive using this tool:
+Here are what you can achive using this tool:
 
 * Generate [LICENSE-DEPENDENCIES.md](assets/LICENSE-DEPENDENCIES.MD) ([example](assets/LICENSE-DEPENDENCIES.MD)) file that contains information about all NuGet packages used in a whole solution (including version, link to a license file and more)
-* Supports both: .Net Core and .Net Framework projects
-* Show information about each *.csproj file (detect framework version, check if the project is .Net Core or .Net Framework project)
-* Check and parse packages.config file
+* Supports both: `.Net Core` and `.Net Framework` projects structure
+* Show information about each `*.csproj` file (detects framework version, checks if the project is .Net Core or .Net Framework project)
+* Check and parse `packages.config` file
 
 ---
 
 ![image](assets/terminal-example.gif)
 
-![image](assets/license-file-example.png)
+![image](assets/license-file-example-full.png)
 
 ---
 
 ## Download
 
-Get the latest binaries [from here](https://github.com/RustamIrzaev/NuGetHelper/releases).
+Get the latest binaries [from here](https://github.com/RustamIrzaev/NuGetHelper/releases) _(supports Windows, MacOS and Linux)_.
 
-There are two kind of archives per each platform: with and without **__full_** suffix.
+There are two kind of archives per each platform: with and without **_full_** suffix.
 
-Packages with **__full** suffix are [self-contained applications](https://docs.microsoft.com/en-us/dotnet/core/deploying/#self-contained-deployments-scd), that **do not** need dotnet framework to be installed, while packages without that suffix are [framework-dependent](https://docs.microsoft.com/en-us/dotnet/core/deploying/#framework-dependent-deployments-fdd) applications and they do need standalone dotnet framework installed.
+> If you are not sure which to download, use `_full` version.
+
+
+### `_full` suffix
+Packages with **_full** suffix are [self-contained applications](https://docs.microsoft.com/en-us/dotnet/core/deploying/#self-contained-deployments-scd), thus **do not** require dotnet framework to be installed, while packages without that suffix are [framework-dependent](https://docs.microsoft.com/en-us/dotnet/core/deploying/#framework-dependent-deployments-fdd) applications and they do need standalone dotnet framework installed.
 
 ## How to use (easy way)
 
@@ -60,7 +64,7 @@ Run the tool with parameters you need directly using `dotnet cli`.
 
 For example
 
-```bash
+```powershell
 dotnet NuGetHelper.Tool.dll --solution-folder "<PROJECT_FOLDER>" --generate-license
 ```
 
@@ -78,30 +82,11 @@ dotnet NuGetHelper.Tool.dll --solution-folder "<PROJECT_FOLDER>" --generate-lice
 
 ## Building the tool (advanced users)
 
-If you want to create a build on your own, just follow those simple steps:
-
-* Clone the repository
-
-* Run a build script depending on your OS:
-
-   ### Mac\Linux
-
-   ```bash
-   chmod +x ./build.sh
-   ./build.sh
-   ```
-
-   ### Windows
-
-   ```powershell
-   .\build.ps1
-   ```
-
-* When the script completes, you will found a ready-to-use build in `build` folder.
+Follow [this](assets/how-to-build.md) guide.
 
 ## Contributing
 
-Feel free to contribute to this amazing project.
+Feel free to create pull requests.
 
 ## License
 
